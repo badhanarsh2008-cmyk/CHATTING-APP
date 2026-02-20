@@ -5,7 +5,7 @@ from string import ascii_uppercase
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "arshdeep"
-socketio = SocketIO(app, cors_allowed_origins="*",async_mode="gevent")
+socketio = SocketIO(app, cors_allowed_origins="*",async_mode="eventlet")
 
 rooms ={}
 def generate_unique_code(length):
@@ -94,6 +94,7 @@ def disconnect():
             del rooms[room]
     send({"name":name,"message":"has left the room"},to=room)
     print(f"{name} has left the room {room}")
+
 
 
 
